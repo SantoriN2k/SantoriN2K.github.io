@@ -1,0 +1,491 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="Your description">
+	<meta name="author" content="Your name">
+	<meta name="generator" content="Hugo 0.85.0" />
+	<title>（CF1574X）Codeforces Round #731 (Div. 3) &middot; wish you like</title>
+	<!-- Stylesheets -->
+	
+	<link rel="stylesheet" href="https://santorin2k.github.io/css/main.css"/>
+	
+	
+
+	
+
+	<!-- Custom Fonts -->
+	<link href="https://santorin2k.github.io/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	
+	<link rel="shortcut icon" type="image/x-icon" href="https://santorin2k.github.io/favicon.ico">
+	<link rel="icon" type="image/x-icon" href="https://santorin2k.github.io/favicon.ico">
+	
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="js/ie/html5shiv.js"></script>
+	<script src="js/ie/html5shiv.jsrespond.min.js"></script>
+	<![endif]-->
+</head>
+
+    <body>
+
+    <!-- Wrapper -->
+        <div id="wrapper">
+
+            <!-- Header -->
+    <header id="header" class="alt">
+        <a href="https://santorin2k.github.io/" class="logo"><strong>nzk</strong> <span>By SantoriN2k</span></a>
+        <nav>
+            <a href="#menu">everthing</a>
+        </nav>
+    </header>
+
+<!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            
+                <li><a href="https://santorin2k.github.io/">创世之初</a></li>
+            
+                <li><a href="https://santorin2k.github.io/blogs">凡尘</a></li>
+            
+                <li><a href="https://santorin2k.github.io/acm">ACM</a></li>
+            
+                <li><a href="https://santorin2k.github.io/elements.html">Elements</a></li>
+            
+
+        </ul>
+        <ul class="actions vertical">
+            
+                <li><a href="https://santorin2k.github.io/000" class="button special fit">成为世界的观测者吧</a></li>
+            
+            
+                <li><a href="https://santorin2k.github.io/" class="button fit">如初</a></li>
+            
+        </ul>
+    </nav>
+
+        <!-- Main -->
+            <div id="main" class="alt">
+
+                
+                    <section id="one">
+                        <div class="inner">
+                            <header class="major">
+                                <h1>（CF1574X）Codeforces Round #731 (Div. 3)</h1>
+                            </header>
+                            
+                                <span class="image main"><img src="/img/555/18.jpg" alt="" /></span>
+                            
+                            <h1 id="cf1574xcodeforces-round-731-div-3">（CF1574X）Codeforces Round #731 (Div. 3)</h1>
+<h2 id="ashortest-path-with-obstacle">A.Shortest Path with Obstacle</h2>
+<p>题意：坐标系中有三个点A,B,F，问A到达B且不经过F的最短路径。</p>
+<p>直接分两种情况，如果ABF在一条直线上则需要绕道，即A到B的直线距离加上2即可，若不在一条直线，则直接输出A到B的折线距离。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">int</span> t;
+    cin<span style="color:#f92672">&gt;&gt;</span>t;
+    <span style="color:#66d9ef">while</span>(t<span style="color:#f92672">--</span>)
+	{
+        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>a(<span style="color:#ae81ff">2</span>);
+        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>b(<span style="color:#ae81ff">2</span>);
+        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>c(<span style="color:#ae81ff">2</span>);
+        cin<span style="color:#f92672">&gt;&gt;</span>a[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">&gt;&gt;</span>a[<span style="color:#ae81ff">1</span>];
+        cin<span style="color:#f92672">&gt;&gt;</span>b[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">&gt;&gt;</span>b[<span style="color:#ae81ff">1</span>];
+        cin<span style="color:#f92672">&gt;&gt;</span>f[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">&gt;&gt;</span>f[<span style="color:#ae81ff">1</span>];
+        <span style="color:#66d9ef">int</span> ans<span style="color:#f92672">=</span>abs(a[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span>b[<span style="color:#ae81ff">0</span>])<span style="color:#f92672">+</span>abs(a[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span>b[<span style="color:#ae81ff">1</span>]);
+        <span style="color:#66d9ef">if</span>((a[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">==</span>b[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">&amp;&amp;</span>a[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">==</span>f[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">&amp;&amp;</span>min(a[<span style="color:#ae81ff">1</span>],b[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">&lt;</span>f[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">&amp;&amp;</span>f[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">&lt;</span>max(a[<span style="color:#ae81ff">1</span>],b[<span style="color:#ae81ff">1</span>]))
+        <span style="color:#f92672">||</span>(a[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span>b[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">&amp;&amp;</span>a[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span>f[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">&amp;&amp;</span>min(a[<span style="color:#ae81ff">0</span>],b[<span style="color:#ae81ff">0</span>])<span style="color:#f92672">&lt;</span>f[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">&amp;&amp;</span>f[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">&lt;</span>max(a[<span style="color:#ae81ff">0</span>],b[<span style="color:#ae81ff">0</span>])))
+        ans<span style="color:#f92672">+=</span><span style="color:#ae81ff">2</span>;
+        cout<span style="color:#f92672">&lt;&lt;</span>ans<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39;\n&#39;</span>;
+    }
+}
+</code></pre></div><h2 id="balphabetical-strings">B.Alphabetical Strings</h2>
+<p>题意：判断一个字符串是否可以按字母表的顺序依次排列出来，比如ihfcbadeg，首先给出a，然后b可以选择放在最左端或最右端，接着再看c能不能放在最左端或最右端，依此类推。</p>
+<p>故可以发现满足条件的字符串，必然满足下面两点：
+a左边必然严格下降，a右边必然严格上升。
+出现的字母个数为n，且为字母表中第一个到第n个字符。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+string s;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+	<span style="color:#66d9ef">int</span> t;
+	cin<span style="color:#f92672">&gt;&gt;</span>t;
+	<span style="color:#66d9ef">while</span>(t<span style="color:#f92672">--</span>)
+	{
+		<span style="color:#66d9ef">int</span> index,flag<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+		cin<span style="color:#f92672">&gt;&gt;</span>s;
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>s.size();i<span style="color:#f92672">++</span>)
+		{
+			<span style="color:#66d9ef">if</span>(s[i]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;a&#39;</span>)index<span style="color:#f92672">=</span>i;
+			<span style="color:#66d9ef">if</span>(s.find(<span style="color:#66d9ef">char</span>(<span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">+</span>i))<span style="color:#f92672">!=</span>string<span style="color:#f92672">::</span>npos)
+			<span style="color:#66d9ef">continue</span>;
+			<span style="color:#66d9ef">else</span>
+			{
+				flag<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+				<span style="color:#66d9ef">break</span>;
+			}
+		}
+		<span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>flag)
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>index;i<span style="color:#f92672">++</span>)
+		{
+			<span style="color:#66d9ef">if</span>(s[i]<span style="color:#f92672">&gt;</span>s[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+			{
+				flag<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+				<span style="color:#66d9ef">break</span>;
+			}
+		}
+		<span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>flag)
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>index<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;</span>s.size();i<span style="color:#f92672">++</span>)
+		{
+			<span style="color:#66d9ef">if</span>(s[i]<span style="color:#f92672">&lt;</span>s[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+			{
+				flag<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+				<span style="color:#66d9ef">break</span>;
+			}
+		}
+		<span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>flag)cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;yes&#34;</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39;\n&#39;</span>;
+		<span style="color:#66d9ef">else</span> cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;no&#34;</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39;\n&#39;</span>; 
+	}
+ }
+</code></pre></div><h2 id="cpair-programming">C.Pair Programming</h2>
+<p>题意：给出一个初始值k，以及两个size一样的数组，每次取两个数组的第一个数中的一个，且要满足取出的数不大于k，若取出的数为0则还会让k加一。</p>
+<p>故直接贪心即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">int</span> k,n,m;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+	<span style="color:#66d9ef">int</span> t;
+	cin<span style="color:#f92672">&gt;&gt;</span>t;
+	<span style="color:#66d9ef">while</span>(t<span style="color:#f92672">--</span>)
+	{
+		cin<span style="color:#f92672">&gt;&gt;</span>k<span style="color:#f92672">&gt;&gt;</span>n<span style="color:#f92672">&gt;&gt;</span>m;
+		vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>a(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+		vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>b(m<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+		vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>c(n<span style="color:#f92672">+</span>m<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>)
+		cin<span style="color:#f92672">&gt;&gt;</span>a[i];
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>m;i<span style="color:#f92672">++</span>)
+		cin<span style="color:#f92672">&gt;&gt;</span>b[i];
+		<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,j<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,flag<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,tot<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+		<span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;=</span>n<span style="color:#f92672">||</span>j<span style="color:#f92672">&lt;=</span>m)
+		{
+			<span style="color:#66d9ef">if</span>(a[i]<span style="color:#f92672">&lt;=</span>k<span style="color:#f92672">&amp;&amp;</span>i<span style="color:#f92672">&lt;=</span>n)
+			{
+				c[<span style="color:#f92672">++</span>tot]<span style="color:#f92672">=</span>a[i];
+				<span style="color:#66d9ef">if</span>(a[i]<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)k<span style="color:#f92672">++</span>;
+				i<span style="color:#f92672">++</span>;
+			}
+			<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(b[j]<span style="color:#f92672">&lt;=</span>k<span style="color:#f92672">&amp;&amp;</span>j<span style="color:#f92672">&lt;=</span>m)
+			{
+				c[<span style="color:#f92672">++</span>tot]<span style="color:#f92672">=</span>b[j];
+				<span style="color:#66d9ef">if</span>(b[j]<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)k<span style="color:#f92672">++</span>;
+				j<span style="color:#f92672">++</span>;
+			}
+			<span style="color:#66d9ef">else</span>
+			{
+				flag<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+				<span style="color:#66d9ef">break</span>;
+			}
+		}
+		<span style="color:#66d9ef">if</span>(flag)cout<span style="color:#f92672">&lt;&lt;-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39;\n&#39;</span>;
+		<span style="color:#66d9ef">else</span>
+		{
+			<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;</span>n<span style="color:#f92672">+</span>m;i<span style="color:#f92672">++</span>)
+			cout<span style="color:#f92672">&lt;&lt;</span>c[i]<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39; &#39;</span>;
+			cout<span style="color:#f92672">&lt;&lt;</span>c[n<span style="color:#f92672">+</span>m]<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39;\n&#39;</span>;
+		}
+	}
+}
+</code></pre></div><h2 id="dco-growing-sequence">D.Co-growing Sequence</h2>
+<p>题意：定义grow数组为其中任意一个数与它的下一个数做&quot;&amp;&ldquo;运算后值不变。给出一个数组x，将每一个xi与一个数yi做异或运算后形成的新数组为grow数组，求最小字典序的y数组。</p>
+<p>首先二进制预处理数组中的每一个数。然后将每一个数xi与前一个数xi-1按位比较，若前一个数的当前位为0，前一个数当前位为1，则相应的yi的当前位必为1。复杂度o(30n)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">int</span> n;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">int</span> t;
+    cin<span style="color:#f92672">&gt;&gt;</span>t;
+    <span style="color:#66d9ef">while</span>(t<span style="color:#f92672">--</span>) 
+	{
+        cin<span style="color:#f92672">&gt;&gt;</span>n;
+        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>a(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>b(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">33</span>));
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>)
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>;j<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">--</span>)
+		b[i][j]<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; <span style="color:#f92672">++</span> i)
+	    {
+            cin<span style="color:#f92672">&gt;&gt;</span>a[i];
+            <span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+            <span style="color:#66d9ef">while</span>(a[i]) 
+		    {
+                b[i][j]<span style="color:#f92672">=</span>a[i]<span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>;
+                a[i]<span style="color:#f92672">/=</span><span style="color:#ae81ff">2</span>;
+                j<span style="color:#f92672">++</span>;
+            }
+        }
+        cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39; &#39;</span>;
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>)
+	    {
+            <span style="color:#66d9ef">int</span> res<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>;j<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">--</span>) 
+		    {
+                <span style="color:#66d9ef">if</span>(b[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][j]<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&amp;&amp;</span>b[i][j]<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>) 
+			    {
+                    b[i][j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+                    res <span style="color:#f92672">+=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j);
+                }
+            }
+            cout<span style="color:#f92672">&lt;&lt;</span>res<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39; &#39;</span>;
+        }
+        cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39;\n&#39;</span>;
+    }
+}
+</code></pre></div><h2 id="eair-conditioners">E.Air Conditioners</h2>
+<p>题意：给出n个房间，并有k台空调位于k个房间，每台空调有一个冷气值，分别求这n个房间到k个空调房的(距离值+冷气值)的最小值。</p>
+<p>对于每一个不为空调房的房间，它到它前面所有的空调房的距离加冷气的最小值为它前一个房间的最小值加一。同理，它到它后面所有的空调房的最小值为它后面一个房间的最小值加一，最后取再取一次min。
+对于每一个为空调房的房间，只用在刚刚的基础上，再对自身的冷气值取一次min。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">int</span> k,n,m;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+	<span style="color:#66d9ef">int</span> t;
+	cin<span style="color:#f92672">&gt;&gt;</span>t;
+	<span style="color:#66d9ef">while</span>(t<span style="color:#f92672">--</span>)
+	{
+		cin<span style="color:#f92672">&gt;&gt;</span>n<span style="color:#f92672">&gt;&gt;</span>k;
+		vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>a(n<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
+		vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>vis(n<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
+		vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>r(n<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
+		vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>l(n<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
+		vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>s(n<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
+		vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>q(n<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>k;i<span style="color:#f92672">++</span>)
+		cin<span style="color:#f92672">&gt;&gt;</span>a[i];
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>)q[i]<span style="color:#f92672">=</span><span style="color:#ae81ff">2e9</span>;
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>k;i<span style="color:#f92672">++</span>)
+		cin<span style="color:#f92672">&gt;&gt;</span>q[a[i]];
+		l[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">2e9</span>,r[n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">2e9</span>;
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>)
+		{
+			l[i]<span style="color:#f92672">=</span>min(l[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,q[i]);
+			r[n<span style="color:#f92672">-</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span>min(r[n<span style="color:#f92672">-</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,q[n<span style="color:#f92672">-</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]);
+		}
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>)
+		{
+			s[i]<span style="color:#f92672">=</span>min(l[i],r[i]);
+			cout<span style="color:#f92672">&lt;&lt;</span>s[i]<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39; &#39;</span>;
+		}
+	}
+}
+</code></pre></div><h2 id="farray-stabilization-gcd-version">F.Array Stabilization (GCD version)</h2>
+<p>题意：给出一个数组a，将每一个数变成其与后一个数的gcd，形成一个新的数组，问最少多少次可以让数组a中每一个数相等。</p>
+<p>可以发现，第i次形成的数组即数组a中每一个数与其后i个数做一次gcd所形成的。故可以用线段树来维护区间的gcd值。然后求次数则用二分答案，因为最多n次操作数组中每个数必相等。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;bits/stdc++.h&gt; </span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#75715e">#define ll long long
+</span><span style="color:#75715e">#define maxn 400005
+</span><span style="color:#75715e"></span>ll nzk[maxn<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>];
+ll a[maxn];
+<span style="color:#66d9ef">int</span> n;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">build</span>(<span style="color:#66d9ef">int</span> root,<span style="color:#66d9ef">int</span> l,<span style="color:#66d9ef">int</span> r)
+{
+	<span style="color:#66d9ef">if</span>(l<span style="color:#f92672">==</span>r)
+	{
+		nzk[root]<span style="color:#f92672">=</span>a[l];
+		<span style="color:#66d9ef">return</span>;
+	}
+	<span style="color:#66d9ef">int</span> mid<span style="color:#f92672">=</span>l<span style="color:#f92672">+</span>(r<span style="color:#f92672">-</span>l)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+	build(root<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>,l,mid);
+	build(root<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,mid<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,r);
+	nzk[root]<span style="color:#f92672">=</span>__gcd(nzk[root<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>],nzk[root<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]);
+}
+ll <span style="color:#a6e22e">query</span>(<span style="color:#66d9ef">int</span> root,<span style="color:#66d9ef">int</span> l,<span style="color:#66d9ef">int</span> r,<span style="color:#66d9ef">int</span> ls,<span style="color:#66d9ef">int</span> rs)
+{
+	<span style="color:#66d9ef">if</span>(ls<span style="color:#f92672">&lt;=</span>l<span style="color:#f92672">&amp;&amp;</span>rs<span style="color:#f92672">&gt;=</span>r)
+	<span style="color:#66d9ef">return</span> nzk[root];
+	<span style="color:#66d9ef">int</span> mid<span style="color:#f92672">=</span>l<span style="color:#f92672">+</span>(r<span style="color:#f92672">-</span>l)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+	<span style="color:#66d9ef">if</span>(ls<span style="color:#f92672">&gt;</span>mid)
+	<span style="color:#66d9ef">return</span> query(root<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,mid<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,r,ls,rs);
+	<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(rs<span style="color:#f92672">&lt;=</span>mid)
+	<span style="color:#66d9ef">return</span> query(root<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>,l,mid,ls,rs);
+	<span style="color:#66d9ef">else</span> 
+	<span style="color:#66d9ef">return</span> __gcd(query(root<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,mid<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,r,ls,rs),query(root<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>,l,mid,ls,rs));	
+}
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">check</span>(<span style="color:#66d9ef">int</span> k)
+{
+	<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>)
+	{
+		ll a<span style="color:#f92672">=</span>query(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>n,i,i<span style="color:#f92672">+</span>k);
+		ll b<span style="color:#f92672">=</span>query(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>n,i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,i<span style="color:#f92672">+</span>k<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+		<span style="color:#66d9ef">if</span>(a<span style="color:#f92672">==</span>b)
+		<span style="color:#66d9ef">continue</span>;
+		<span style="color:#66d9ef">else</span>
+		<span style="color:#66d9ef">return</span> false;
+	}
+	<span style="color:#66d9ef">return</span> true;
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+	<span style="color:#66d9ef">int</span> t;
+	cin<span style="color:#f92672">&gt;&gt;</span>t;
+	<span style="color:#66d9ef">while</span>(t<span style="color:#f92672">--</span>)
+	{
+		scanf(<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>n);
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>)
+		{
+			scanf(<span style="color:#e6db74">&#34;%lld&#34;</span>,<span style="color:#f92672">&amp;</span>a[i]);
+			a[i<span style="color:#f92672">+</span>n]<span style="color:#f92672">=</span>a[i];
+		}
+		build(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>n);
+		<span style="color:#66d9ef">int</span> l<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,r<span style="color:#f92672">=</span>n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+		<span style="color:#66d9ef">while</span>(l<span style="color:#f92672">&lt;</span>r)
+		{
+			<span style="color:#66d9ef">int</span> mid<span style="color:#f92672">=</span>l<span style="color:#f92672">+</span>(r<span style="color:#f92672">-</span>l)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+			<span style="color:#66d9ef">if</span>(check(mid))r<span style="color:#f92672">=</span>mid;
+			<span style="color:#66d9ef">else</span> l<span style="color:#f92672">=</span>mid<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+		}
+		cout<span style="color:#f92672">&lt;&lt;</span>l<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#39;\n&#39;</span>;
+	}
+}
+</code></pre></div><h2 id="ghow-many-paths">G.How Many Paths?</h2>
+<p>题意：给出n个点m条边的有向图，对于第i个点，若从1到i没有路径，输出0，有一条路径，输出1，有多条路径，输出2，无数条则输出n。</p>
+<p>DFS的搜索中结点状态有3种：未被搜索到，正在扩展搜索，以及搜索完毕。根据DFS的特性，如果正在扩展的结点被再次访问，则说明存在环；如果以及搜索完毕的结点被再次访问，则说明有多条路径。
+在环中的结点可以到达的点，一定是无限路径；多条路径的结点可以到达的点也一定是多条路径。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#75715e">#define maxn 400005
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> n,t,m;
+<span style="color:#66d9ef">int</span> color[maxn];
+<span style="color:#66d9ef">int</span> c[<span style="color:#ae81ff">2</span>][maxn];
+vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>e;
+vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>group[<span style="color:#ae81ff">2</span>];
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs1</span>(<span style="color:#66d9ef">int</span> u)
+{
+	color[u]<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+	<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> v:e[u])
+	{
+		<span style="color:#66d9ef">if</span>(color[v]<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)
+		dfs1(v);
+		<span style="color:#66d9ef">else</span>
+		group[color[v]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>].push_back(v);
+	}
+	color[u]<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs2</span>(<span style="color:#66d9ef">int</span> u,<span style="color:#66d9ef">int</span> i)
+{
+	c[i][u]<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+	<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> v:e[u])
+	{
+		<span style="color:#66d9ef">if</span>(c[i][v]<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)
+		dfs2(v,i);
+	}
+	c[i][u]<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+	scanf(<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>t);
+	<span style="color:#66d9ef">while</span>(t<span style="color:#f92672">--</span>)
+	{
+		scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>,<span style="color:#f92672">&amp;</span>n,<span style="color:#f92672">&amp;</span>m);
+		e<span style="color:#f92672">=</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+		memset(color,<span style="color:#ae81ff">0</span>,<span style="color:#66d9ef">sizeof</span>(color));
+		memset(c,<span style="color:#ae81ff">0</span>,<span style="color:#66d9ef">sizeof</span>(c));
+		group[<span style="color:#ae81ff">0</span>].clear();
+		group[<span style="color:#ae81ff">1</span>].clear();
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>m;i<span style="color:#f92672">++</span>)
+		{
+			<span style="color:#66d9ef">int</span> a,b;
+			scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>,<span style="color:#f92672">&amp;</span>a,<span style="color:#f92672">&amp;</span>b);
+			e[a].push_back(b);
+		}
+		dfs1(<span style="color:#ae81ff">1</span>);
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span>;i<span style="color:#f92672">++</span>)
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> u:group[i])
+		dfs2(u,i);
+		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;=</span>n;i<span style="color:#f92672">++</span>)
+		{
+			<span style="color:#66d9ef">int</span> ans<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+			<span style="color:#66d9ef">if</span>(color[i])
+			{
+				ans<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+				<span style="color:#66d9ef">if</span>(c[<span style="color:#ae81ff">0</span>][i])
+				ans<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>;
+				<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(c[<span style="color:#ae81ff">1</span>][i])
+				ans<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+			}
+			printf(<span style="color:#e6db74">&#34;%d%c&#34;</span>,ans,i<span style="color:#f92672">==</span>n<span style="color:#f92672">?</span><span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39; &#39;</span>);
+		}
+	}
+}
+</code></pre></div><h2 id="总结">总结</h2>
+<p>由于是div3，比赛题目还是不太难的，做出六题应该问题不大，但第四题卡了很久，最后思路和标答一样，却因为数组清零操作t了，吸取经验继续努力。</p>
+
+                        </div>
+                    </section>
+            <!-- Disqus Inject -->
+                
+            </div>
+            
+        <!-- Footer -->
+            
+                <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                
+                    <li><a href="https://www.twitter.com" class="icon alt fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+                
+                    <li><a href="https://www.facebook.com" class="icon alt fa-facebook" target="_blank"><span class="label">Facebook</span></a></li>
+                
+                    <li><a href="https://www.instagram.com" class="icon alt fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
+                
+                    <li><a href="https://www.github.com" class="icon alt fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+                
+                    <li><a href="https://www.linkedin.com" class="icon alt fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+                
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Company Name</li>
+                
+                <li>Design:  <a href="https://www.html5up.net">HTML5 UP</a></li>
+                
+            </ul>
+        </div>
+    </footer>
+
+            
+        </div>
+
+    <!-- Scripts -->
+        <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="https://santorin2k.github.io/js/jquery.min.js"></script>
+    <script src="https://santorin2k.github.io/js/jquery.scrolly.min.js"></script>
+    <script src="https://santorin2k.github.io/js/jquery.scrollex.min.js"></script>
+    <script src="https://santorin2k.github.io/js/skel.min.js"></script>
+    <script src="https://santorin2k.github.io/js/util.js"></script>
+
+    
+
+    <!-- Main JS -->
+    <script src="https://santorin2k.github.io/js/main.js"></script>
+
+    
+
+    
+
+    </body>
+</html>
